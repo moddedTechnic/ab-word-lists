@@ -4,14 +4,14 @@ import { computed, ref } from 'vue'
 const words = [
   ['ship', 'rug', 'fan', 'cheek', 'haze', 'dice', 'both', 'well', 'jot', 'move'],
   ['fish', 'duck', 'gap', 'cheese', 'rail', 'hive', 'bone', 'wedge', 'moss', 'tooth'],
-  ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10'],
-  ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10'],
+  ['thud', 'witch', 'wrap', 'jail', 'keys', 'vice', 'get', 'shown', 'hoof', 'bomb'],
+  ['fun', 'will', 'that', 'shape', 'wreath', 'hide', 'guess', 'comb', 'choose', 'job'],
   ['fib', 'thatch', 'sum', 'heel', 'wide', 'rake', 'goes', 'shop', 'vet', 'june'],
   ['fill', 'catch', 'thumb', 'heap', 'wise', 'rave', 'goat', 'shone', 'bed', 'juice'],
-  ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'g9', 'g10'],
+  ['badge', 'hutch', 'kill', 'thighs', 'wave', 'reap', 'foam', 'goose', 'knot', 'shed'],
   ['bath', 'hum', 'dip', 'five', 'ways', 'reach', 'joke', 'noose', 'got', 'shell'],
   ['man', 'hip', 'thug', 'ride', 'siege', 'veil', 'chose', 'shoot', 'web', 'cough'],
-  ['j1', 'j2', 'j3', 'j4', 'j5', 'j6', 'j7', 'j8', 'j9', 'j10'],
+  ['have', 'whizz', 'buff', 'mice', 'teeth', 'guage', 'poach', 'rule', 'den', 'cosh'],
   ['kiss', 'buzz', 'hash', 'thieve', 'gate', 'wife', 'pole', 'wretch', 'dodge', 'moon'],
   ['wish', 'dutch', 'jam', 'heath', 'laze', 'bike', 'rove', 'pet', 'fog', 'soon'],
 ]
