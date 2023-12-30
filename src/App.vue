@@ -9,11 +9,11 @@ const words = [
   ['fib', 'thatch', 'sum', 'heel', 'wide', 'rake', 'goes', 'shop', 'vet', 'june'],
   ['fill', 'catch', 'thumb', 'heap', 'wise', 'rave', 'goat', 'shone', 'bed', 'juice'],
   ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'g9', 'g10'],
-  ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8', 'h9', 'h10'],
-  ['i1', 'i2', 'i3', 'i4', 'i5', 'i6', 'i7', 'i8', 'i9', 'i10'],
+  ['bath', 'hum', 'dip', 'five', 'ways', 'reach', 'joke', 'noose', 'got', 'shell'],
+  ['man', 'hip', 'thug', 'ride', 'siege', 'veil', 'chose', 'shoot', 'web', 'cough'],
   ['j1', 'j2', 'j3', 'j4', 'j5', 'j6', 'j7', 'j8', 'j9', 'j10'],
-  ['k1', 'k2', 'k3', 'k4', 'k5', 'k6', 'k7', 'k8', 'k9', 'k10'],
-  ['l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8', 'l9', 'l10'],
+  ['kiss', 'buzz', 'hash', 'thieve', 'gate', 'wife', 'pole', 'wretch', 'dodge', 'moon'],
+  ['wish', 'dutch', 'jam', 'heath', 'laze', 'bike', 'rove', 'pet', 'fog', 'soon'],
 ]
 
 const audioSources = ref<HTMLAudioElement[]>([])
@@ -47,6 +47,12 @@ function endTest() {
   currentTest.value++
 }
 
+function previousTest(): number {
+  const test = currentTest.value - 1
+  if (test < 1)
+    return words.length
+  return test
+}
 function randomTest(): number {
   let test
   while ((test = Math.floor(Math.random() * 12) + 1) === currentTest.value);
@@ -83,9 +89,9 @@ function stopCalibration() {
 
   <div class="test-info">
     <div class="test-controls">
-      <button @click.prevent="currentTest--">Previous</button>
+      <button @click.prevent="currentTest = previousTest()">Previous</button>
       <button @click.prevent="currentTest = randomTest()">Random</button>
-      <button @click.prevent="currentTest++">Next</button>
+      <button @click.prevent="currentTest = currentTest % words.length + 1">Next</button>
     </div>
   </div>
 
@@ -187,7 +193,18 @@ function stopCalibration() {
   align-items: center;
   justify-content: space-between;
 
+  max-width: 15rem;
+  margin-inline: auto;
+  margin-bottom: 0.25rem;
+  padding-inline: 1rem 0.5rem;
+
   font-size: 1.25rem;
+  background-color: #fff0;
+
+  transition: background-color 175ms ease-in-out;
+}
+.word:hover {
+  background-color: #fff3;
 }
 
 .word p {
@@ -199,8 +216,8 @@ function stopCalibration() {
 }
 
 .word label {
-  margin-right: 1rem;
   font-weight: 300;
+  padding-inline: 0.5rem;
 }
 
 .word input:checked+label {
