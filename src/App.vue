@@ -1,34 +1,51 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-const audioSource = ref<HTMLAudioElement | null>(null)
+const audioSources = ref<HTMLAudioElement[]>([])
 const runningTest = ref(false)
 const currentTest = ref(1)
-
-const testLabel = computed(() => currentTest.value.toString().padStart(2, '0'))
+const currentAudio = computed(() => audioSources.value[currentTest.value - 1])
 
 function startTest() {
-  if (runningTest.value || !audioSource.value)
+  console.log(currentAudio.value)
+  if (runningTest.value || !currentAudio.value)
     return;
   runningTest.value = true
-  audioSource.value.play()
+  currentAudio.value.play()
 }
 
 function stopTest() {
-  if (!runningTest.value || !audioSource.value)
+  if (!runningTest.value || !currentAudio.value)
     return;
   runningTest.value = false
-  audioSource.value.pause()
-  audioSource.value.currentTime = 0
+  currentAudio.value.pause()
+  currentAudio.value.currentTime = 0
+}
+
+function endTest() {
+  stopTest()
+  currentTest.value++
+}
+
+function randomTest(): number {
+  let test
+  while ((test = Math.floor(Math.random() * 12) + 1) === currentTest.value);
+  return test
 }
 </script>
 
 <template>
-  <div class="test-controls">
+  <div class="test-info">
     <p class="currentTest">
       Current Test
       <span>{{ currentTest }}</span>
     </p>
+
+    <div class="test-controls">
+      <button @click.prevent="currentTest--">Previous</button>
+      <button @click.prevent="currentTest = randomTest()">Random</button>
+      <button @click.prevent="currentTest++">Next</button>
+    </div>
   </div>
 
   <div class="controls">
@@ -37,17 +54,34 @@ function stopTest() {
     <button v-if="runningTest" @click.prevent="stopTest">Cancel Test</button>
     <button v-else @click.prevent="startTest">Begin Test</button>
   </div>
-  <audio ref="audioSource">
-    <source :src="`/audio/list-${testLabel}.wav`" type="audio/wav" />
-  </audio>
+
+  <template v-for="i in 12">
+    <audio ref="audioSources" @ended="endTest">
+      <source :src="`/audio/list-${i.toString().padStart(2, '0')}.wav`" type="audio/wav" />
+    </audio>
+  </template>
 </template>
 
 <style scoped>
+.test-info {
+  margin-bottom: 1rem;
+}
+
+.test-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+
+  font-size: 1.5rem;
+}
+
 .controls {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   gap: 2rem;
 
   font-size: 1.5rem;
