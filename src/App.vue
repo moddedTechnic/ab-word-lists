@@ -203,6 +203,7 @@ function stopCalibration() {
 
   transition: background-color 175ms ease-in-out;
 }
+
 .word:hover {
   background-color: #fff3;
 }
